@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Операция «Багратион» — подлинный шедевр военной стратегии</title>
+    <!-- Шрифты: машинописный Special Elite, рукописный Caveat, основной PT Sans (замените на свои по инструкции) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        /* ========== СБРОС И БАЗОВЫЕ НАСТРОЙКИ ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PT Sans', sans-serif;
+            background-color: #3f2e1e;
+            color: #2c1e0e;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Основной контейнер с текстурой старой бумаги */
+        .paper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4e9d8;
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 8px),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.15"/></svg>');
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-left: 2px solid #7a5a3a;
+            border-right: 2px solid #7a5a3a;
+            padding: 80px 30px 40px 30px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .section-spacer {
+            margin-top: 50px;
+        }
+
+        /* ===== ФИКСИРОВАННОЕ ГАМБУРГЕР-МЕНЮ ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #2c1e0e;
+            border-bottom: 2px solid #a1251b;
+            z-index: 1000;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .nav-logo {
+            font-family: 'Special Elite', cursive;
+            color: #f4e9d8;
+            font-size: 1.2rem;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: #f4e9d8;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 60px;
+            left: -100%;
+            width: 250px;
+            height: 100vh;
+            background: #2c1e0e;
+            border-right: 2px solid #a1251b;
+            transition: left 0.3s ease;
+            padding: 20px 0;
+            z-index: 999;
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .nav-menu a {
+            font-family: 'Special Elite', cursive;
+            color: #f4e9d8;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 5px 15px;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background: #a1251b;
+        }
+
+        /* Заголовки разделов — центрируем */
+        h1, h2, h3 {
+            font-family: 'Special Elite', cursive;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #3e2c1a;
+            border-bottom: 2px solid #a1251b;
+            padding-bottom: 5px;
+            margin-bottom: 25px;
+            position: relative;
+            word-wrap: break-word;
+            text-align: center; /* все заголовки по центру */
+        }
+
+        h1 {
+            font-size: 3rem;
+            border-bottom: 3px solid #a1251b;
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            border-bottom: 1px dashed #a1251b;
+        }
+
+        /* Даты */
+        .dates {
+            font-family: 'Special Elite', cursive;
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 20px 0 40px;
+            color: #5e3a1f;
+            background: rgba(161,37,27,0.1);
+            padding: 10px;
+            border: 1px dashed #a1251b;
+            word-wrap: break-word;
+        }
+
+        /* Машинописный текст */
+        .typewriter {
+            font-family: 'Special Elite', cursive;
+            font-size: 1.1rem;
+            word-wrap: break-word;
+        }
+
+        /* Рукописный текст (для цитат) */
+        .handwritten {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            line-height: 1.4;
+            color: #2c1e0e;
+            word-wrap: break-word;
+        }
+
+        /* Анимация появления */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Две колонки (силы сторон) */
+        .columns {
+            display: flex;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .column {
+            flex: 1;
+            background: rgba(255,255,240,0.7);
+            padding: 20px;
+            border: 1px solid #7a5a3a;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+        .column h3 {
+            text-align: center;
+            border-bottom: 2px solid #a1251b;
+        }
+        .column ul {
+            list-style: none;
+        }
+        .column li {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            font-family: 'Special Elite', cursive;
+            word-wrap: break-word;
+        }
+
+        /* Карточки персон (командующие, герои) — сетка 2 колонки на компьютере */
+        .persons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .person-card {
+            background: #dac8b0;
+            border: 2px solid #7a5a3a;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 3px 3px 0 #3e2c1a;
+            transition: transform 0.2s;
+            word-wrap: break-word;
+        }
+        .person-card:hover {
+            transform: scale(1.02);
+        }
+        .photo-placeholder {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px;
+            background: #5e4b34;
+            border-radius: 50%;
+            border: 3px solid #a1251b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f4e9d8;
+            font-family: 'Special Elite', cursive;
+            font-size: 2rem;
+            text-transform: uppercase;
+            box-shadow: 0 0 0 2px #f4e9d8;
+        }
+        .person-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .person-role {
+            font-style: italic;
+            color: #3e2c1a;
+        }
+
+        /* Кнопки */
+        .btn {
+            background: #a1251b;
+            border: none;
+            color: #f4e9d8;
+            font-family: 'Special Elite', cursive;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            margin: 5px;
+            cursor: pointer;
+            border-bottom: 3px solid #5e2b1a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 2px 2px 0 #2c1e0e;
+            word-wrap: break-word;
+        }
+        .btn:hover {
+            background: #7e1e15;
+        }
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        /* Контейнер для динамического контента (под кнопками) */
+        .dynamic-content {
+            background: rgba(255,255,240,0.8);
+            border: 2px dashed #a1251b;
+            padding: 25px;
+            margin: 30px 0;
+            font-family: 'PT Sans', sans-serif;
+            word-wrap: break-word;
+        }
+
+        /* Георгиевская лента со звездой */
+        .ribbon-star {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ribbon {
+            width: 100%;
+            height: 20px;
+            background: repeating-linear-gradient(45deg, #000 0px, #000 10px, #e67e22 10px, #e67e22 20px);
+            border: 1px solid #5e2b1a;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .star {
+            width: 40px;
+            height: 40px;
+            background-color: #a1251b;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            border: 2px solid gold;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Фотохроника (6 фото) */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .photo-item {
+            background: #dac8b0;
+            border: 2px solid #7a5a3a;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 3px 3px 0 #3e2c1a;
+            word-wrap: break-word;
+        }
+        .photo-placeholder-large {
+            width: 100%;
+            height: 180px;
+            background: #5e4b34;
+            border: 2px solid #a1251b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f4e9d8;
+            font-family: 'Special Elite', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .photo-caption {
+            font-family: 'PT Sans', sans-serif;
+            font-style: italic;
+            color: #2c1e0e;
+        }
+
+        /* Немецкая цитата */
+        .german-quote {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #b89e7a;
+            padding: 20px;
+            border-left: 10px solid #a1251b;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .german-photo-rect {
+            width: 120px;
+            height: 120px;
+            background: #3e2c1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f4e9d8;
+            font-size: 3rem;
+            flex-shrink: 0;
+            border: 2px solid #a1251b;
+        }
+        .quote-text {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: #2c1e0e;
+            flex: 1;
+            word-wrap: break-word;
+        }
+
+        /* Видео сетка для четырёх видео */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #7a5a3a;
+        }
+
+        /* Поиск по датам */
+        .search-section {
+            background: rgba(255,255,240,0.7);
+            border: 2px solid #a1251b;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            font-family: 'Special Elite', cursive;
+            font-size: 1.2rem;
+            border: 2px solid #7a5a3a;
+            background: #f4e9d8;
+            color: #2c1e0e;
+        }
+        .search-box button {
+            padding: 12px 25px;
+            background: #a1251b;
+            color: #f4e9d8;
+            border: none;
+            font-family: 'Special Elite', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-bottom: 3px solid #5e2b1a;
+        }
+        .search-result {
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.2rem;
+            padding: 15px;
+            background: #dac8b0;
+            border-left: 5px solid #a1251b;
+        }
+
+        /* Книги */
+        .books-list {
+            background: rgba(255,255,240,0.7);
+            border: 2px solid #a1251b;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .books-list ul {
+            list-style: none;
+        }
+        .books-list li {
+            margin: 15px 0;
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.2rem;
+            padding-left: 20px;
+            border-left: 3px solid #a1251b;
+        }
+
+        /* Адаптация */
+        @media (max-width: 700px) {
+            .paper {
+                padding: 80px 15px 20px 15px;
+            }
+            h1 { font-size: 2rem; }
+            .columns {
+                flex-direction: column;
+            }
+            .german-quote {
+                flex-direction: column;
+                text-align: center;
+            }
+            .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            .persons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+#heroes { display: none; }
+
+/* Анимация гамбургера в крестик */
+.hamburger span {
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+    </style>
+</head>
+<body>
+    <!-- Фиксированное гамбургер-меню -->
+    <nav class="navbar">
+        <div class="nav-logo">Операция «Багратион» - подлинный шедевр военной стратегии</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    <div class="nav-menu" id="navMenu">
+        <ul>
+            <li><a href="#goals">Цели</a></li>
+            <li><a href="#forces">Силы сторон</a></li>
+            <li><a href="#soviet-command">Советское командование</a></li>
+            <li><a href="#german-command">Немецкое командование</a></li>
+            <li><a href="#interactive">Интерактив</a></li>
+            <li><a href="#search">Поиск по датам</a></li>  <!-- поиск теперь здесь -->
+            <li><a href="#map">Карта</a></li>
+            <li><a href="#german-reaction">Реакция немцев</a></li>
+            <li><a href="#front-commanders">Командующие фронтами</a></li>
+            <li><a href="#photo-chronicle">Фотохроника</a></li>
+            <li><a href="#videos">Видеоматериалы</a></li>
+            <li><a href="#books">Книги</a></li> <!-- новый пункт -->
+        </ul>
+    </div>
+
+    <div class="paper">
+        <!-- Шапка -->
+        <h1>Белорусская наступательная операция «Багратион»</h1>
+        <div class="dates">23 июня — 29 августа 1944 года</div>
+
+        <!-- Цели операции -->
+        <section id="goals" class="fade-in">
+            <h2>Цели операции</h2>
+            <p class="typewriter">Разгром центральной группы немецких армий, освобождение Белоруссии, выход к границам Восточной Пруссии и Польши. Крупнейшее наступление Красной Армии летом 1944 года.</p>
+        </section>
+
+        <!-- Силы сторон -->
+        <section id="forces" class="fade-in section-spacer ">
+            <h2>Силы сторон</h2>
+            <div class="columns">
+                <div class="column">
+                    <h3>СССР</h3>
+                    <ul>
+                        <li>Личный состав: 2.4 млн</li>
+                        <li>Орудия и миномёты: 36 000</li>
+                        <li>Танки и САУ: 5 200</li>
+                        <li>Самолёты: 5 300</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Германия</h3>
+                    <ul>
+                        <li>Личный состав: 1.2 млн</li>
+                        <li>Орудия и миномёты: 9 500</li>
+                        <li>Танки и САУ: 900</li>
+                        <li>Самолёты: 1 350</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Советское командование -->
+        <section id="soviet-command" class="fade-in section-spacer">
+            <h2>Советское командование</h2>
+            <div class="persons-grid">
+                <!-- Жуков -->
+                <div class="person-card">
+                    <img src="images/jukovg.jpg" alt="Г.К. Жуков" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;">
+                    <div class="person-name">Георгий Жуков</div>
+                    <div class="person-role">Координатор 1-го и 2-го Белорусских фронтов</div>
+                </div>
+                <!-- Василевский -->
+                <div class="person-card">
+                    <img src="images/vasil.jpg" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;">
+                    <div class="person-name">Александр Василевский</div>
+                    <div class="person-role">Координатор 1-го Прибалтийского и 3-го Белорусского фронтов</div>
+                </div>
+                <!-- Антонов -->
+                <div class="person-card">
+                    <img src="images/antona.jpg" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;">
+                    <div class="person-name">Алексей Антонов</div>
+                    <div class="person-role">Разработчик плана операции, начальник Оперативного управления Генштаба</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Немецкое командование -->
+        <section id="german-command" class="fade-in section-spacer">
+            <h2>Немецкое командование</h2>
+            <div class="persons-grid">
+                <!-- Буш -->
+                <div class="person-card">
+                    <img src="images/bush.jpg" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;">
+                    <div class="person-name">Эрнст Буш</div>
+                    <div class="person-role">Командующий группой армий «Центр» (до 28 июня)</div>
+                </div>
+                <!-- Модель -->
+                <div class="person-card">
+                    <img src="images/model.jpg"style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;" >
+                    <div class="person-name">Вальтер Модель</div>
+                    <div class="person-role">Командующий группой армий «Центр» (с 28 июня)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Интерактивные кнопки -->
+        <section id="interactive" class="fade-in section-spacer">
+            <h2>Интерактив</h2>
+            <div style="text-align: center; margin: 40px 0;">
+                <button class="btn" id="btnName">Почему «Багратион»?</button>
+                <button class="btn" id="btnPrep">Подготовка и дезинформация</button>
+                <button class="btn" id="btnStages">Этапы операции</button>
+            </div>
+            <div id="dynamicArea" class="dynamic-content">
+                <p class="typewriter">Нажмите на одну из кнопок, чтобы увидеть информацию.</p>
+            </div>
+        </section>
+
+        <!-- Поиск по датам (перенесён сюда) -->
+        <section id="search" class="fade-in section-spacer">
+            <h2>Поиск по датам</h2>
+            <div class="search-section">
+                <div class="search-box">
+                    <input type="text" id="dateInput" placeholder="Введите дату, например: 23 июня">
+                    <button id="searchBtn">Найти</button>
+                </div>
+                <div id="searchResult" class="search-result">Здесь появится результат поиска</div>
+            </div>
+        </section>
+
+        <!-- Карта наступления -->
+        <section id="map" class="fade-in section-spacer">
+            <h2>Карта наступления</h2>
+            <div class="map-container">
+                <img src="images/plan.jpg" alt="Карта операции Багратион" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22600%22%20viewBox%3D%220%200%20800%20600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23dac8b0%22%2F%3E%3Ctext%20x%3D%2240%22%20y%3D%22300%22%20font-family%3D%22Special%20Elite%22%20font-size%3D%2230%22%20fill%3D%22%233e2c1a%22%3E%D0%9A%D0%B0%D1%80%D1%82%D0%B0%20%D0%BD%D0%B0%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20(%D0%B7%D0%B0%D0%B3%D0%BB%D1%83%D1%88%D0%BA%D0%B0)%3C%2Ftext%3E%3C%2Fsvg%3E';" style="max-width:100%; border:5px solid #7a5a3a; box-shadow:8px 8px 0 rgba(0,0,0,0.2);">
+            </div>
+        </section>
+
+        <!-- Реакция немцев -->
+        <section id="german-reaction" class="fade-in section-spacer">
+            <h2>Реакция немецких генералов</h2>
+            <div class="german-quote">
+                <img src="images/gen.jpg" alt="Немецкие генералы" style="width:120px; height:120px; object-fit: cover; border:2px solid #a1251b;">
+                <div class="quote-text">«Это была катастрофа, превосходящая Сталинградскую»<br><span style="font-size: 1rem; font-family: 'Special Elite';">— из высказываний немецких генералов</span></div>
+            </div>
+        </section>
+
+        <!-- Командующие фронтами -->
+        <section id="front-commanders" class="fade-in section-spacer">
+            <h2>Командующие фронтами</h2>
+            <div class="persons-grid">
+                <div class="person-card"><img src="images/bagram.jpeg" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;"><div class="person-name">Иван Баграмян</div><div class="person-role">1-й Прибалтийский фронт</div></div>
+                <div class="person-card"><img src="images/chern.jpeg" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;"><div class="person-name">Иван Черняховский</div><div class="person-role">3-й Белорусский фронт</div></div>
+                <div class="person-card"><img src="images/zahar.jpg" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;"><div class="person-name">Георгий Захаров</div><div class="person-role">2-й Белорусский фронт</div></div>
+                <div class="person-card"><img src="images/rokossov.jpg"style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border:3px solid #a1251b; box-shadow: 0 0 0 2px #f4e9d8;" ><div class="person-name">Константин Рокоссовский</div><div class="person-role">1-й Белорусский фронт</div></div>
+            </div>
+        </section>
+
+        <!-- Герои операции (с подробными описаниями) -->
+        <section id="heroes" class="fade-in section-spacer">
+            <h2>Герои операции «Багратион»</h2>
+            <div class="persons-grid">
+                <div class="person-card">
+                    <div class="photo-placeholder">ИЯ</div>
+                    <div class="person-name">Иван Якубовский</div>
+                    <div class="person-role">Командир танковой бригады. В боях за Минск его бригада первой ворвалась в город, уничтожила десятки огневых точек и взяла в плен более 200 солдат противника. Дважды Герой Советского Союза.</div>
+                </div>
+                <div class="person-card">
+                    <div class="photo-placeholder">ПК</div>
+                    <div class="person-name">Павел Курныгин</div>
+                    <div class="person-role">Командир стрелкового полка. При прорыве обороны под Витебском лично поднял бойцов в атаку, захватил важную высоту и обеспечил продвижение дивизии. Герой Советского Союза (посмертно).</div>
+                </div>
+                <div class="person-card">
+                    <div class="photo-placeholder">ЮС</div>
+                    <div class="person-name">Юрий Смирнов</div>
+                    <div class="person-role">Лётчик-штурмовик. Совершил 146 боевых вылетов, уничтожил 30 танков, 50 автомашин, 15 зенитных батарей. Дважды Герой Советского Союза.</div>
+                </div>
+                <div class="person-card">
+                    <div class="photo-placeholder">ПЕ</div>
+                    <div class="person-name">Пётр Егоров</div>
+                    <div class="person-role">Партизанский командир. Организовал крушение 40 вражеских эшелонов, взорвал 3 моста, истребил более 500 гитлеровцев. Герой Советского Союза.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Фотохроника (6 фото) -->
+        <section id="photo-chronicle" class="fade-in section-spacer">
+            <h2>Фотохроника операции</h2>
+            <div class="photo-grid">
+                <div class="photo-item"><img src="images/osvminsk.jpg" style="width:100%; height:180px; object-fit: cover; border:2px solid #a1251b; margin-bottom:10px;"><p class="photo-caption">Освобождённый Минск, июль 1944</p></div>
+                <div class="photo-item"><img src="images/t34tral.jpeg" style="width:100%; height:180px; object-fit: cover; border:2px solid #a1251b; margin-bottom:10px;"><p class="photo-caption">Танк Т-34-85 с тралом</p></div>
+                <div class="photo-item"><img src="images/nemtank.jpeg" style="width:100%; height:180px; object-fit: cover; border:2px solid #a1251b; margin-bottom:10px;"><p class="photo-caption">Уничтоженный немецкий танк PZ-4</p></div>
+                <div class="photo-item"><img src="images/polock.jpg" style="width:100%; height:180px; object-fit: cover; border:2px solid #a1251b; margin-bottom:10px;"><p class="photo-caption">Полоцк, освобожденный войсками 1-го Прибалтийского фронта</p></div>
+                <div class="photo-item"><img src="images/parad.jpg" style="width:100%; height:180px; object-fit: cover; border:2px solid #a1251b; margin-bottom:10px;"><p class="photo-caption">Марш "побежденных" в Москве, 1944</p></div>
+                <div class="photo-item"><img src="images/zitel.jpg" style="width:100%; height:180px; object-fit: cover; border:2px solid #a1251b; margin-bottom:10px;"><p class="photo-caption">Жители города Орша встречают своих освободителей</p></div>
+            </div>
+        </section>
+
+<!-- НАЧАЛО БЛИЦ-ОПРОСА -->
+<section id="quiz-section" class="fade-in section-spacer">
+    <h2>Блиц-опрос: проверь свои знания</h2>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h2>⚡ БЛИЦ-ОПРОС ⚡</h2>
+            <p class="typewriter">Операция «Багратион» — правда или нет?</p>
+        </div>
+        <div class="quiz-body" id="quizBody">
+            <!-- сюда динамически подставляются вопросы -->
+        </div>
+        <div class="footer-note typewriter" style="text-align: center; font-size: 0.9rem; margin-top: 10px;">
+            ★ Проверь свои знания о крупнейшей наступательной операции 1944 года ★
+        </div>
+    </div>
+</section>
+
+<style>
+    .quiz-container {
+        background: rgba(255,255,240,0.7);
+        border: 2px solid #7a5a3a;
+        border-radius: 15px;
+        box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+        overflow: hidden;
+        margin: 30px 0;
+    }
+    .quiz-header {
+        background: #2c1e0e;
+        color: #f4e9d8;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 3px solid #a1251b;
+    }
+    .quiz-header h2 {
+        font-family: 'Special Elite', cursive;
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+        color: #f4e9d8;
+        border-bottom: none;
+    }
+    .quiz-header p {
+        font-family: 'PT Sans', sans-serif;
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+    .quiz-body {
+        padding: 30px 25px;
+        background: #faf9f6;
+    }
+    .question-area {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .progress {
+        font-family: 'Special Elite', cursive;
+        font-size: 1rem;
+        color: #2c1e0e;
+        background: #e9ecef;
+        display: inline-block;
+        padding: 6px 18px;
+        border-radius: 30px;
+        margin-bottom: 20px;
+        border: 1px solid #7a5a3a;
+    }
+    .question-text {
+        font-family: 'Special Elite', cursive;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #3e2c1a;
+        background: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid #7a5a3a;
+        margin: 20px 0;
+    }
+    .answer-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .btn-yes, .btn-no, .btn-restart, .btn-cert {
+        background: #a1251b;
+        border: none;
+        color: #f4e9d8;
+        font-family: 'Special Elite', cursive;
+        font-size: 1.2rem;
+        padding: 12px 25px;
+        cursor: pointer;
+        border-bottom: 3px solid #5e2b1a;
+        text-transform: uppercase;
+        box-shadow: 2px 2px 0 #2c1e0e;
+    }
+    .btn-yes:hover, .btn-no:hover, .btn-restart:hover, .btn-cert:hover {
+        background: #7e1e15;
+    }
+    .result-box {
+        background: #dac8b0;
+        border-radius: 15px;
+        padding: 30px;
+        border: 2px solid #7a5a3a;
+        margin-bottom: 20px;
+    }
+    .result-score {
+        font-family: 'Special Elite', cursive;
+        font-size: 3rem;
+        color: #3e2c1a;
+        margin: 15px 0;
+    }
+    .certificate-section {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 2px dashed #7a5a3a;
+    }
+    .input-field {
+        width: 100%;
+        padding: 12px;
+        font-family: 'Special Elite', cursive;
+        border: 2px solid #7a5a3a;
+        background: #f4e9d8;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    @media (max-width: 700px) {
+        .quiz-body { padding: 20px; }
+        .question-text { font-size: 1.3rem; }
+        .btn-yes, .btn-no, .btn-restart, .btn-cert { font-size: 1rem; padding: 10px 20px; }
+    }
+    .result-area {
+    text-align: center;
+}
+.result-score {
+    text-align: center;
+}
+.result-message {
+    text-align: center;
+}
+.btn-restart, .btn-cert {
+    display: inline-block;
+    margin: 10px auto;
+}
+.certificate-section {
+    text-align: center;
+}
+</style>
+
+<script>
+    (function() {
+        const questions = [
+            { text: "Операция «Багратион» началась летом 1944 года?", answer: true },
+            { text: "Операция названа в честь грузинского князя Петра Багратиона?", answer: true },
+            { text: "Главный удар наносился в направлении Москвы?", answer: false },
+            { text: "В результате операции была полностью освобождена Белорусская ССР?", answer: true },
+            { text: "Операция завершилась только к декабрю 1944 года?", answer: false }
+        ];
+        const total = questions.length;
+        let current = 0, correct = 0, finished = false;
+        const quizBody = document.getElementById('quizBody');
+
+        function render() {
+            if (!finished) {
+                const q = questions[current];
+                quizBody.innerHTML = `
+                    <div class="question-area">
+                        <div class="progress">Вопрос ${current+1} из ${total}</div>
+                        <div class="question-text">${q.text}</div>
+                        <div class="answer-buttons">
+                            <button class="btn-yes" id="answerYes">ДА</button>
+                            <button class="btn-no" id="answerNo">НЕТ</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('answerYes').onclick = () => handle(true);
+                document.getElementById('answerNo').onclick = () => handle(false);
+            } else {
+                let msg = correct === total ? 'Блестяще!' : (correct >= total/2 ? 'Неплохо!' : 'Стоит повторить');
+                quizBody.innerHTML = `
+                    <div class="result-area">
+                        <div class="result-box">
+                            <div class="result-score">${correct} / ${total}</div>
+                            <div class="result-message">${msg}</div>
+                            <button class="btn-restart" id="restartQuiz">Пройти ещё раз</button>
+                        </div>
+                        <div class="certificate-section">
+                            <h3>🎖 ПОЛУЧИТЕ ГРАМОТУ</h3>
+                            <input type="text" id="fullName" class="input-field" placeholder="Ваше имя">
+                            <button class="btn-cert" id="downloadCert">📜 Скачать</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('restartQuiz').onclick = restart;
+                document.getElementById('downloadCert').onclick = () => {
+                    let name = document.getElementById('fullName').value.trim();
+                    if (!name) { alert('Введите ваше ФИО'); return; }
+                    generateCert(name, correct, total);
+                };
+            }
+        }
+
+        function handle(choice) {
+            if (choice === questions[current].answer) correct++;
+            if (++current < total) render();
+            else { finished = true; render(); }
+        }
+        function restart() { current = 0; correct = 0; finished = false; render(); }
+
+        function generateCert(name, score, total) {
+            const c = document.createElement('canvas');
+            c.width = 800; c.height = 600;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = '#fdf8f0'; ctx.fillRect(0, 0, 800, 600);
+            ctx.strokeStyle = '#7a5a3a'; ctx.lineWidth = 15; ctx.strokeRect(20, 20, 760, 560);
+            ctx.strokeStyle = '#a1251b'; ctx.lineWidth = 4; ctx.strokeRect(45, 45, 710, 510);
+            ctx.fillStyle = '#2c1e0e'; ctx.font = 'bold 48px "Special Elite"'; ctx.textAlign = 'center';
+            ctx.fillText('ГРАМОТА', 400, 130);
+            ctx.font = '28px "PT Sans"'; ctx.fillText('НАГРАЖДАЕТСЯ', 400, 220);
+            ctx.font = 'bold 42px "Special Elite"'; ctx.fillText(name, 400, 300);
+            ctx.font = '26px "PT Sans"'; ctx.fillText('за успешное прохождение блиц-опроса', 400, 380);
+            ctx.font = 'bold 30px "Special Elite"'; ctx.fillText('«ОПЕРАЦИЯ БАГРАТИОН»', 400, 440);
+            ctx.fillStyle = '#a1251b'; ctx.font = 'bold 36px "Special Elite"';
+            ctx.fillText(`${score} / ${total} правильных ответов`, 400, 510);
+            ctx.fillStyle = '#5c5c5c'; ctx.font = '20px "PT Sans"';
+            ctx.fillText(new Date().toLocaleDateString('ru-RU'), 400, 550);
+            const link = document.createElement('a');
+            link.download = `грамота_${name.replace(/\s/g,'_')}.png`;
+            link.href = c.toDataURL();
+            link.click();
+        }
+        render();
+    })();
+</script>
+<!-- КОНЕЦ БЛИЦ-ОПРОСА -->
+
+        <!-- Видеоматериалы (4 видео) -->
+        <section id="videos" class="fade-in section-spacer">
+            <h2>Видеоматериалы</h2>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://rutube.ru/play/embed/e913b33541eb70ff80890a118154ef99/?skinColor=e53935" style="border: none;" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>" title="Великая война. 11 серия. Операция Багратион" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://vk.com/video_ext.php?oid=-93838483&id=456240630&hd=3" width="1280" height="720" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen></iframe>" title="Историческое видео 2" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://rutube.ru/play/embed/eb42cc28423ba2a094280daab15adbe0/" style="border: none;" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>" title="Историческое видео 3" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://dzen.ru/embed/oBEawEVUIAAA?from_block=partner&from=zen&mute=0&autoplay=0&tv=0" allow="autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media" data-testid="embed-iframe" frameborder="0" scrolling="no" allowfullscreen></iframe>" title="Историческое видео 4" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <p class="typewriter" style="text-align: center; margin-bottom: 30px;">Приятного просмотра!</p>
+        </section>
+        
+        <!-- Книги (новый раздел) -->
+        <section id="books" class="fade-in section-spacer">
+            <h2>Рекомендуемые книги</h2>
+            <div class="books-list">
+                <ul>
+                    <li><strong>«История Великой Отечественной войны Советского Союза 1941–1945» в 6 томах.</strong> — М.: Воениздат, 1960–1965. Фундаментальный труд Министерства обороны СССР, освещающий все этапы войны, включая операцию «Багратион».</li>
+                    <li><strong>«Операция "Багратион"» / под ред. А.М. Самсонова.</strong> — М.: Наука, 1994. Подробный анализ стратегии и тактики советских войск.</li>
+                    <li><strong>«Освобождение Белоруссии. 1944» / сост. В.А. Жилин.</strong> — М.: Вече, 2014. Сборник документов и воспоминаний участников.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Подвал -->
+        <footer style="margin-top: 50px; border-top: 1px solid #7a5a3a; padding-top: 20px; text-align: center; font-family: 'Special Elite';">
+            Сайт создан исключительно в просветительских целях как продукт для Итогового Индивидуального Проекта. Вся информация взята из открытых источников. Сайт не несёт цели оскорбить, занизить  чьё-либо достоинство, задеть чувства верующих. 2026
+        </footer>
+    </div>
+
+    <!-- Скрипты -->
+    <script>
+        // Гамбургер меню
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');   // ← добавить
+});
+
+        // Закрыть меню при клике вне его
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+        hamburger.classList.remove('active');   // ← добавить
+            }
+        });
+
+        // Закрыть меню при клике на ссылку
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');   // ← добавить
+            });
+        });
+
+        // Анимация появления при скролле
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.2, rootMargin: '0px 0px -30px 0px' };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        // Данные для динамических кнопок
+        const dynamicArea = document.getElementById('dynamicArea');
+
+        const stalinQuote = `
+            <img src="images/lentag.png" style="display: block; width: 325px; margin: 0px auto;">
+            <p class="handwritten" style="text-align: center;">«Сталин слушал внимательно… - Место выбрано верно. Тут в двенадцатом году армия Багратиона насмерть билась с французами. Назовем операцию в честь него – «Багратион»».</p>
+            <img src="images/lentag.png" style="display: block; width: 325px; margin: 0px auto;">
+            <p class="typewriter" style="text-align: right;">— И.В. Сталин (из мемуаров А.М. Василевского)</p>
+        `;
+
+        const prepText = `
+            <h3 class="handwritten">Скрытность и дезинформация</h3>
+            <p class="typewriter">Советское командование провело беспрецедентную операцию по маскировке. Войска сосредотачивались только ночью, радиостанции работали в прежнем режиме, создавалась видимость подготовки удара на юге. Немецкая разведка была полностью дезориентирована — появление сотен тысяч солдат и тысяч танков стало для группы армий «Центр» полной неожиданностью.</p>
+        `;
+
+        const stages = [
+            { name: 'Витебско-Оршанская операция (23–28 июня)', desc: 'Войска 1-го Прибалтийского и 3-го Белорусского фронтов прорвали оборону, окружили и уничтожили 5 немецких дивизий под Витебском. 26 июня освобождён Витебск, 27 июня — Орша.' },
+            { name: 'Могилёвская операция (23–28 июня)', desc: '2-й Белорусский фронт форсировал Днепр и 28 июня освободил Могилёв. Немецкие части понесли тяжёлые потери.' },
+            { name: 'Минская операция (29 июня – 4 июля)', desc: 'Стремительное наступление танковых соединений. 3 июля освобождён Минск. Восточнее города в окружение попала 100-тысячная группировка противника.' },
+            { name: 'Полоцкая операция (29 июня – 4 июля)', desc: '1-й Прибалтийский фронт освободил Полоцк и создал угрозу северному флангу группы армий «Центр».' },
+            { name: 'Вильнюсская операция (5–20 июля)', desc: '3-й Белорусский фронт освободил Вильнюс, разгромив немецкий гарнизон.' },
+            { name: 'Белостокская операция (5–27 июля)', desc: '2-й Белорусский фронт освободил Белосток и вышел к границам Восточной Пруссии.' },
+            { name: 'Люблин-Брестская операция (18 июля – 2 августа)', desc: '1-й Белорусский фронт освободил Брест и Люблин, форсировал Вислу, захватив плацдармы.' },
+            { name: 'Каунасская операция (28 июля – 28 августа)', desc: 'Преследование отходящих немецких частей, освобождение Каунаса.' }
+        ];
+
+        function showStagesMenu() {
+            let html = '<h3>Выберите этап:</h3><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">';
+            stages.forEach((stage, index) => {
+                html += `<button class="btn stage-btn" data-index="${index}">${stage.name}</button>`;
+            });
+            html += '</div><div id="stageDesc" class="typewriter" style="margin-top: 20px;"></div>';
+            dynamicArea.innerHTML = html;
+
+            document.querySelectorAll('.stage-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = e.target.dataset.index;
+                    document.getElementById('stageDesc').innerHTML = `<strong>${stages[idx].name}</strong><br>${stages[idx].desc}`;
+                });
+            });
+        }
+
+        document.getElementById('btnName').addEventListener('click', () => {
+            dynamicArea.innerHTML = stalinQuote;
+        });
+        document.getElementById('btnPrep').addEventListener('click', () => {
+            dynamicArea.innerHTML = prepText;
+        });
+        document.getElementById('btnStages').addEventListener('click', showStagesMenu);
+
+        // Поиск по датам
+        const events = {
+            "23 июня": "Начало операции «Багратион». Войска 1-го Прибалтийского, 3-го и 2-го Белорусских фронтов перешли в наступление на витебском и оршанском направлениях.",
+            "24 июня": "Прорыв обороны противника на всех направлениях. Введены в прорыв танковые корпуса.",
+            "26 июня": "Освобождён Витебск. Восточнее города окружена 5-я немецкая дивизия.",
+            "27 июня": "Освобождена Орша. Завершён разгром витебской группировки противника.",
+            "28 июня": "Освобождён Могилёв. Начало Минской операции.",
+            "29 июня": "Советские войска форсировали Березину. Начало Полоцкой операции.",
+            "3 июля": "Освобождён Минск. Восточнее города попало в окружение более 100 тыс. немецких солдат.",
+            "4 июля": "Завершена Минская операция. Освобождён Полоцк.",
+            "5 июля": "Начало Вильнюсской и Белостокской операций.",
+            "13 июля": "Освобождён Вильнюс.",
+            "16 июля": "В Москве проведён марш пленных немецких солдат, захваченных в Белоруссии.",
+            "27 июля": "Освобождён Белосток. Завершена Белостокская операция.",
+            "28 июля": "Освобождён Брест. Начало Каунасской операции.",
+            "1 августа": "Начало Люблин-Брестской операции (форсирование Вислы).",
+            "29 августа": "Завершение операции «Багратион». Выход советских войск к границам Восточной Пруссии."
+        };
+
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const input = document.getElementById('dateInput').value.trim();
+            const resultDiv = document.getElementById('searchResult');
+            if (events[input]) {
+                resultDiv.innerHTML = `<strong>${input}:</strong> ${events[input]}`;
+            } else {
+                resultDiv.innerHTML = 'Событий на эту дату не найдено. Попробуйте другую формулировку (например, "3 июля").';
+            }
+        });
+    </script>
+    <!-- Инструкция по замене изображений и шрифтов остаётся из предыдущих версий -->
+</body>
+</html>
